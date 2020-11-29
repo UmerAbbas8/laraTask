@@ -1,0 +1,136 @@
+After reading the assignment task I think this project looks verry simple if we want to make it simple,
+but it can be expanded to use it for many different type of services that need client vendor interaction.
+For example,
+
+- Resturants
+- Local Delivery Services
+- Grocery Stores
+- Mechanic Services
+- Electrition/Plumbing Services
+etc.
+
+So basically there are two parties one is the service provider (Vendor) other is the one who avails the service (Client).
+
+1)  Client
+2)  Vendor
+(
+They both need to be registered,
+
+- Vendor need to register so that they can list their services.
+- Client need to register so that they can request for a service.
+
+Now to handle the requests of the client
+
+we have Requests that is pending for the service as it is accepted by the Vendor,
+any payment method can be attached to that request, now this request can have different states, like it is pending, in progress, dispatched, delivered, and another payment state for this request, prepaid, payment on delivery (cash) etc.
+
+
+
+
+
+Questions 1:
+
+i. How would you implement this on PHP:Laravel to handle this kind of scenario?
+
+Laravel offers Delayed dispatching for the kind of scenario that require to wait for a certain period of time before actually
+perrforming a said task.
+
+    1) Step 1:
+        Request API:
+            API request that contains request info with sender (client) info, and payment information.
+    2) Step 2:
+        Request Authentication
+        Request Verification
+    3) Step 3:
+        Retrieveing Vendor information from the request,
+        confirming the payment information,
+        validating the payemnt menthod,
+        preapring the request for Vendor.
+    4) Step 4:
+        Delayign the request for a certain perid of time, then sending the request to vendor
+
+We can send emails notifications, or firebase push notifications about different states of the request to the client as the request progress towards completion.
+
+Of course, you can add multiple checks and send response back to the client as you see fit, for example before accepting the request check to see if the requested service is currently available or not, checck if request itme is in stock or not, etc.
+
+
+Question 2:
+Design a database that manages the application above.
+
+Tables
+
+## clients
+id,
+name,
+username,
+email,
+phone,
+password,
+profile_image,
+status,
+created_at,
+updated_at,
+
+
+## vendors
+id,
+name,
+business_name,
+email,
+phone,
+password,
+profile_image,
+business_detail_id,
+status,
+created_at,
+updated_at,
+
+
+## services
+id,
+vendor_id,
+service_history_id,
+name,
+detail,
+type,
+category,
+sub_category,
+price,
+discount_type,
+discount,
+tax_type,
+tax,
+status,
+created_at,
+updated_at,
+
+
+## requests
+id,
+client_id,
+vendor_id,
+service_id,
+message_for_vendor,
+service_history_id,
+status,
+payment_status,
+payment_id,
+created_at,
+updated_at,
+
+
+## payments
+id,
+request_id,
+client_id,
+service_id,
+vendor_id,
+payment_method,
+amount,
+status,
+transaction_id,
+transaction_reponse (JSON),
+created_at,
+updated_at,
+
+

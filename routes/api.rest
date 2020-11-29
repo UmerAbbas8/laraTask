@@ -1,0 +1,27 @@
+GET http://127.0.0.1:8000/api HTTP/1.1
+
+
+###
+POST http://127.0.0.1:8000/api/create_request
+Content-Type: application/json
+Accept: application/json
+
+{
+    "client_id": "3",
+    "service_id": "5",
+    "message_for_vendor": "3333 delayed"
+}
+
+
+###
+GET http://127.0.0.1:8000/api/get_services
+
+
+###
+POST http://127.0.0.1:8000/api/vendor/get_requests
+Content-Type: application/json
+Accept: application/json
+
+{
+    "vendor_id": "5"
+}
